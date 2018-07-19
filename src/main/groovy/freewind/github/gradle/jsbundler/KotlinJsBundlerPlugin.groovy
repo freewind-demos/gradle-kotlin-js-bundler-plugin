@@ -4,7 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class Extension {
-    File outputBundleFile
+    String outputFile
 }
 
 class KotlinJsBundlerPlugin implements Plugin<Project> {
@@ -19,8 +19,8 @@ class KotlinJsBundlerPlugin implements Plugin<Project> {
             dependsOn 'classes'
             doLast {
                 project.sync {
-                    configurations.compile.each { File file ->
-                        from(zipTree(file.absolutePath), {
+                    project.configurations.compile.each { File file ->
+                        from(project.zipTree(file.absolutePath), {
                             includeEmptyDirs = false
                             include { fileTreeElement ->
                                 def path = fileTreeElement.path
@@ -39,8 +39,8 @@ class KotlinJsBundlerPlugin implements Plugin<Project> {
                 def dependentJsFiles = dirOfDependentJsFiles(project).listFiles()
                 def outputJsFile = project.tasks.getByName('compileKotlin2Js').outputs.files.findAll { it.isFile() && isAcceptedJsFile(it.name) }
                 String bundleCode = KotlinJsBundler.combine(dependentJsFiles.toList() + outputJsFile)
-                extension.outputBundleFile.write(bundleCode)
-                println("write bundle file: ${extension.outputBundleFile}")
+                new File(extension.outputFile).write(bundleCode)
+                println("write bundle file: ${extension.outputFile}")
             }
         }
 

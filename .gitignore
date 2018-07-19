@@ -3,3 +3,5 @@
 /gradle-test.*
 .gradle/
 out/
+build/
+testing-project/bundle.js
