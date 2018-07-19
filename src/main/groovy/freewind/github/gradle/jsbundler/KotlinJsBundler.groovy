@@ -5,7 +5,6 @@ static String combine(List<File> files) {
     return modules.collect { "// ------------------- ${it.file.name} ---------------------- \n${it.file.text}" }.join("\n\n")
 }
 
-
 private static List<Module> sort(List<Module> modules) {
     List<Module> sorted = []
     def move = { List<Module> items ->
@@ -40,7 +39,7 @@ private static String findModuleName(String code) {
 
 private static List<String> findDependencies(String code) {
     def matches = code =~ /Its dependency '(.+?)' was not found\./
-    return matches.collect { it[1] }
+    return matches.collect { it[1].toString() }
 }
 
 class Module {

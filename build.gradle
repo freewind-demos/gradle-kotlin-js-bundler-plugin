@@ -16,8 +16,3 @@ dependencies {
     testCompile 'org.easytesting:fest-assert-core:2.0M10'
 }
 
-// used to generate `./gradlew`
-// by run `gradle wrapper`
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.8' //version required
-}
