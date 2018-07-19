@@ -1,4 +1,4 @@
-package my
+package freewind.github.gradle.jsbundler
 
 static String combine(List<File> files) {
     def modules = sort(files.collect { checkModule(it) })

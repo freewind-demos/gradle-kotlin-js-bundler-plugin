@@ -1,4 +1,4 @@
-package my
+package freewind.github.gradle.jsbundler
 
 import org.junit.Test
 

@@ -1,12 +1,17 @@
 apply plugin: 'groovy'
+apply plugin: 'maven'
 
 repositories {
     mavenLocal()
     jcenter()
 }
 
+group 'freewind.github.com'
+version '0.1.0'
+
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.5.0'
+    compile gradleApi()
+    compile localGroovy()
     testCompile 'junit:junit:4.11'
     testCompile 'org.easytesting:fest-assert-core:2.0M10'
 }
