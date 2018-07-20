@@ -37,6 +37,9 @@ class KotlinJsBundlerPlugin implements Plugin<Project> {
         project.task('kotlinJsBundler') {
             dependsOn 'extractDependentJsFiles'
             doLast {
+                if (extension.outputFile == null) {
+                    throw new IllegalArgumentException('kotlinJsBundler.outputFile should not be null')
+                }
                 def dependentJsFiles = dirOfDependentJsFiles(project).listFiles()
                 def outputJsFile = project.tasks.getByName('compileKotlin2Js').outputs.files.findAll { it.isFile() && isAcceptedJsFile(it.name) }
                 def allJsFiles = dependentJsFiles.toList() + outputJsFile + extension.additionalJsFiles.collect { new File(it) }
