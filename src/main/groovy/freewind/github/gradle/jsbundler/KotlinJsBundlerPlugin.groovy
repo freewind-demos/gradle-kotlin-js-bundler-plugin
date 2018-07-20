@@ -4,7 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class Extension {
-    List<String> additionalJsFiles
+    List<String> additionalJsFiles = []
     String outputFile
 }
 
