@@ -8,8 +8,12 @@ fun main(args: Array<String>) {
         this.name = "Freewind"
     }
     window.alert(JSON.stringify(user))
+    myHello()
 }
 
 interface User {
     var name: String
 }
+
+@JsName("myHello")
+external fun myHello()

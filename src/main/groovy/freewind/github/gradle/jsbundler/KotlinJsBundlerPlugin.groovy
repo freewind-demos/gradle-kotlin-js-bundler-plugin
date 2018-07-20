@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class Extension {
+    List<String> additionalJsFiles
     String outputFile
 }
 
@@ -38,7 +39,8 @@ class KotlinJsBundlerPlugin implements Plugin<Project> {
             doLast {
                 def dependentJsFiles = dirOfDependentJsFiles(project).listFiles()
                 def outputJsFile = project.tasks.getByName('compileKotlin2Js').outputs.files.findAll { it.isFile() && isAcceptedJsFile(it.name) }
-                String bundleCode = KotlinJsBundler.combine(dependentJsFiles.toList() + outputJsFile)
+                def allJsFiles = dependentJsFiles.toList() + outputJsFile + extension.additionalJsFiles.collect { new File(it) }
+                String bundleCode = KotlinJsBundler.combine(allJsFiles)
                 new File(extension.outputFile).write(bundleCode)
                 println("write bundle file: ${extension.outputFile}")
             }

@@ -30,6 +30,7 @@ buildscript {
 apply plugin: 'kotlin-js-bundler'
 
 kotlinJsBundler {
+    additionalJsFiles = []
     outputFile = "$projectDir/bundle.js"
 }
 ```
@@ -44,5 +45,10 @@ cd testing-project
 
 It will generate a `bundle.js` file when everything is working well, the file combined all required files like `kotlin.js`, so we can just include only one js file in `index.html`.
 
-Then open `testing-project/index.html` and you will see an alert, which means everything is OK.
+Then open `testing-project/index.html` and you will see
+
+- an alert: `{"name":"Freewind"}`
+- console: `my hello`, from external `my.js`
+
+which means everything is OK.
 

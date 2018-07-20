@@ -21,6 +21,7 @@ apply plugin: 'kotlin-js-bundler'
 //}
 
 kotlinJsBundler {
+    additionalJsFiles = ["data/my.js"]
     outputFile = "${projectDir}/bundle.js"
 }
 
